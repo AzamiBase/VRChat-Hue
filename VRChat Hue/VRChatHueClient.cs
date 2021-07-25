@@ -9,10 +9,12 @@ namespace VRChat_Hue
     public class VRChatHueClient
     {
         private HueController _hue;
+        private SimpleVRChatConsoleParser _parser;
 
         public VRChatHueClient()
         {
             _hue = new HueController();
+            _parser = new SimpleVRChatConsoleParser();
         }
 
         public void Start()
@@ -37,11 +39,34 @@ namespace VRChat_Hue
         {
             Console.WriteLine("[VRChat Hue Client] Found API Key. Initializing hue client");
             await _hue.Initialize();
-            await _hue.SetColorLoop(false); //for some reason this persists, unsure why don't really care though just disable it at startup
+            await _hue.SetToOrange(); //set default color
 
-            //await _hue.SetToOrange();
-            await _hue.SetToBlue();
-            //await _hue.SetToPurple();
+            _parser.StartParser(async delegate(string command) {
+                //this is proof of concept stuff. implement this however you want
+              
+                Console.WriteLine($"[VRChat Hue Client] Command Detected: {command}");
+                switch (command)
+                {
+                    case "ColorLoop":
+                        await _hue.SetColorLoop(true);
+                        break;
+                    case "Blue":
+                        await _hue.SetToBlue();
+                        break;
+                    case "Orange":
+                        await _hue.SetToOrange();
+                        break;
+                    case "Purple":
+                        await _hue.SetToPurple();
+                        break;
+                    case "On":
+                        await _hue.TurnBulbsOn();
+                        break;
+                    case "Off":
+                        await _hue.TurnBulbsOff();
+                        break;
+                }
+            });
 
             Console.ReadKey();
         }

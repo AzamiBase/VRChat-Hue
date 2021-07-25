@@ -64,6 +64,7 @@ namespace VRChat_Hue
             Console.WriteLine($"[Hue Controller] Changing color to #{hex.ToUpper()}");
             var command = new LightCommand();
             command.On = true;
+            command.Effect = Effect.None;
             command.TurnOn().SetColor(new RGBColor(hex));
             await _client.SendCommandAsync(command);
         }
@@ -72,7 +73,8 @@ namespace VRChat_Hue
         #region Light Control Testing
         public async Task SetColorLoop(bool enabled)
         {
-            Console.WriteLine($"[Hue Controller] Setting color loop enabled: {enabled}");
+            if (enabled)
+                Console.WriteLine($"[Hue Controller] Enabling Color Loop");
             var command = new LightCommand();
             command.On = enabled;
             command.Effect = Effect.ColorLoop;
@@ -92,6 +94,22 @@ namespace VRChat_Hue
         public async Task SetToOrange()
         {
             await SetColor("ebb434");
+        }
+
+        public async Task TurnBulbsOff()
+        {
+            var command = new LightCommand();
+            command.On = true;
+            command.Brightness = 0;
+            await _client.SendCommandAsync(command);
+        }
+
+        public async Task TurnBulbsOn()
+        {
+            var command = new LightCommand();
+            command.On = true;
+            command.Brightness = 100;
+            await _client.SendCommandAsync(command);
         }
         #endregion //Light Control Testing
     }

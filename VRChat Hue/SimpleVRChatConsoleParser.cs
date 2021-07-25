@@ -28,23 +28,15 @@ namespace VRChat_Hue
                     //every 5 seconds check for a new log file
                     //Console.WriteLine("[VRChat Parser] Checking for new log file...");
                     var logFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"Low\VRChat\VRChat";
-                    var files = new DirectoryInfo(logFolder)
+                    var file = new DirectoryInfo(logFolder)
                                 .GetFiles()
-                                .OrderByDescending(x => x.LastWriteTime);
+                                .OrderByDescending(x => x.LastWriteTime)
+                                .FirstOrDefault(x => x.Name.Contains("output_log_"));
 
-                    foreach (var f in files)
+                    if (file != null && file.FullName != _file)
                     {
-                        var name = f.Name;
-                        if (!name.Contains("output_log_"))
-                            continue;
-
-                        if (f.FullName != _file)
-                        {
-                            _file = f.FullName;
-                            _newLog = true;
-                        }
-
-                        break;
+                        _file = file.FullName;
+                        _newLog = true;
                     }
 
                     if (_newLog)

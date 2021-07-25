@@ -10,7 +10,7 @@ using static VRChat_Hue.StringSplitExtension;
 
 namespace VRChat_Hue
 {
-    public class SimpleVRChatConsoleParser
+    public class SimpleVRChatLogParser
     {
         private bool _running;
         private bool _newLog;

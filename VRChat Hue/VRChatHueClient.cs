@@ -9,12 +9,12 @@ namespace VRChat_Hue
     public class VRChatHueClient
     {
         private HueController _hue;
-        private SimpleVRChatConsoleParser _parser;
+        private SimpleVRChatLogParser _parser;
 
         public VRChatHueClient()
         {
             _hue = new HueController();
-            _parser = new SimpleVRChatConsoleParser();
+            _parser = new SimpleVRChatLogParser();
         }
 
         public void Start()

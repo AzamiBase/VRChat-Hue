@@ -90,7 +90,7 @@
     <Compile Include="HueController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleVRChatConsoleParser.cs" />
+    <Compile Include="SimpleVRChatLogParser.cs" />
     <Compile Include="StringSplitExtension.cs" />
     <Compile Include="VRChatHueClient.cs" />
   </ItemGroup>

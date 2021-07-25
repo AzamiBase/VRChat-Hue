@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRChat Hue", "VRChat Hue\VRChat Hue.csproj", "{3D9A9BF2-3399-4887-B9B6-A29C6C394D77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D9A9BF2-3399-4887-B9B6-A29C6C394D77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D9A9BF2-3399-4887-B9B6-A29C6C394D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D9A9BF2-3399-4887-B9B6-A29C6C394D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D9A9BF2-3399-4887-B9B6-A29C6C394D77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {01B7A066-097B-4FDE-808B-2D8C10E26342}
+	EndGlobalSection
+EndGlobal

@@ -10,10 +10,8 @@ namespace VRChat_Hue
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("hello");
-
-
-            Console.ReadKey();
+            VRChatHueClient client = new VRChatHueClient();
+            client.Start();
         }
     }
 }

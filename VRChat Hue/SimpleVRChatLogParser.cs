@@ -69,7 +69,7 @@ namespace VRChat_Hue
                     string lastCmd = "";
                     for (; ; )
                     {
-                        if (_newLog)
+                        if (_newLog || !_running)
                             return;
 
                         // read every 1 second

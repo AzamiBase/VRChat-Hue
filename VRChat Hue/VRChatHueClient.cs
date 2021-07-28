@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace VRChat_Hue
@@ -41,30 +42,51 @@ namespace VRChat_Hue
             await _hue.Initialize();
             await _hue.SetToOrange(); //set default color
 
-            _parser.StartParser(async delegate(string command) {
-                //this is proof of concept stuff. implement this however you want
-              
-                Console.WriteLine($"[VRChat Hue Client] Command Detected: {command}");
-                switch (command)
+            _parser.StartParser(async delegate(string content) {
+                if (!string.IsNullOrWhiteSpace(content))
                 {
-                    case "ColorLoop":
-                        await _hue.SetColorLoop(true);
-                        break;
-                    case "Blue":
-                        await _hue.SetToBlue();
-                        break;
-                    case "Orange":
-                        await _hue.SetToOrange();
-                        break;
-                    case "Purple":
-                        await _hue.SetToPurple();
-                        break;
-                    case "On":
-                        await _hue.TurnBulbsOn();
-                        break;
-                    case "Off":
-                        await _hue.TurnBulbsOff();
-                        break;
+                    string[] lines = content.Split('\n');
+
+                    foreach (string dirtyLine in lines)
+                    {
+                        string line = Regex.Replace(dirtyLine
+                            .Replace("\r", "")
+                            .Replace("\n", "")
+                            .Replace("\t", "")
+                            .Trim(),
+                            @"\s+", " ", RegexOptions.Multiline);
+
+                        if (string.IsNullOrWhiteSpace(line))
+                            continue;
+
+                        if (!line.Contains("[Hue]"))
+                            continue;
+
+                        string command = line.Split("[Hue] ")[1];
+
+                        Console.WriteLine($"[VRChat Hue Client] Command Detected: {command}");
+                        switch (command)
+                        {
+                            case "ColorLoop":
+                                await _hue.SetColorLoop(true);
+                                break;
+                            case "Blue":
+                                await _hue.SetToBlue();
+                                break;
+                            case "Orange":
+                                await _hue.SetToOrange();
+                                break;
+                            case "Purple":
+                                await _hue.SetToPurple();
+                                break;
+                            case "On":
+                                await _hue.TurnBulbsOn();
+                                break;
+                            case "Off":
+                                await _hue.TurnBulbsOff();
+                                break;
+                        }
+                    }
                 }
             });
 
